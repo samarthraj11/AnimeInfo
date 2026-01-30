@@ -47,3 +47,11 @@ fun App() {
         }
     }
 }
+
+/*
+ to use
+ - koin for DI
+ - coil for image loading
+ - ktor for api calls
+ - compose navigation
+ */
