@@ -42,8 +42,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor3)
-            implementation(libs.ktor.client.core)
-//            implementation(libs.compose.material.icon/s.extended)
+            implementation(compose.materialIconsExtended)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
