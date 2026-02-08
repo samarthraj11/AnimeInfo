@@ -24,6 +24,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Airlines
 
 // --- Constants & Colors based on Tailwind Config ---
 val ColorBackgroundDark = Color(0xFF1C1022)
@@ -105,11 +108,11 @@ fun TopHeaderSection() {
                     .background(Color.White.copy(alpha = 0.05f)),
                 contentAlignment = Alignment.Center
             ) {
-//                Icon(
-//                    imageVector = Icon,
-//                    contentDescription = "Notifications",
-//                    tint = Color.White
-//                )
+                Icon(
+                    imageVector = Icons.Outlined.Airlines,
+                    contentDescription = "Notifications",
+                    tint = Color.White
+                )
             }
         }
 
