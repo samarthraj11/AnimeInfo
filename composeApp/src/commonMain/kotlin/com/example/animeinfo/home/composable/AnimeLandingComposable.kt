@@ -1,4 +1,4 @@
-package com.example.animeinfo
+package com.example.animeinfo.home.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
