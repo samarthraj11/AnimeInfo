@@ -3,14 +3,44 @@ package com.example.animeinfo.home.composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessAlarms
+import androidx.compose.material.icons.filled.AutoFixHigh
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.RocketLaunch
+import androidx.compose.material.icons.outlined.Airlines
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,12 +51,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import androidx.compose.material3.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Airlines
 
 // --- Constants & Colors based on Tailwind Config ---
 val ColorBackgroundDark = Color(0xFF1C1022)
@@ -36,6 +64,7 @@ val ColorTextSecondary = Color(0xFFB09DB9)
 val ColorSearchBg = Color(0xFF332839)
 val ColorGlass = Color(0xCC1C1022) // ~80% opacity for glass effect
 
+@Preview
 @Composable
 fun AnimeDiscoveryScreen() {
     Scaffold(
@@ -45,7 +74,7 @@ fun AnimeDiscoveryScreen() {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = paddingValues.calculateBottomPadding()),
+                .padding(top = paddingValues.calculateTopPadding(), bottom = paddingValues.calculateBottomPadding()),
             contentPadding = PaddingValues(bottom = 24.dp)
         ) {
             item { TopHeaderSection() }
@@ -129,12 +158,12 @@ fun TopHeaderSection() {
                 modifier = Modifier.fillMaxSize(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-//                Icon(
-//                    imageVector = Icons.Rounded.Search,
-//                    contentDescription = "Search",
-//                    tint = ColorTextSecondary,
-//                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
-//                )
+                Icon(
+                    imageVector = Icons.Default.AccessAlarms,
+                    contentDescription = "Search",
+                    tint = ColorTextSecondary,
+                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+                )
                 Text(
                     text = "Search for anime, studios...",
                     color = ColorTextSecondary,
@@ -263,11 +292,11 @@ fun TrendingCard(item: TrendingAnime) {
                         .height(40.dp),
                     contentPadding = PaddingValues(0.dp)
                 ) {
-//                    Icon(
-//                        imageVector = Icons.Rounded.PlayArrow,
-//                        contentDescription = null,
-//                        modifier = Modifier.size(18.dp)
-//                    )
+                    Icon(
+                        imageVector = Icons.Default.AccessAlarms,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(text = "Watch Now", fontWeight = FontWeight.Bold)
                 }
@@ -323,13 +352,16 @@ fun SeasonalCard(item: AnimeItem) {
                     .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(4.dp))
                     .padding(horizontal = 6.dp, vertical = 2.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(2.dp)) {
-//                    Icon(
-//                        imageVector = Icons.Rounded.Star,
-//                        contentDescription = null,
-//                        tint = Color(0xFFFFD700), // Gold
-//                        modifier = Modifier.size(12.dp)
-//                    )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.AccessAlarms,
+                        contentDescription = null,
+                        tint = Color(0xFFFFD700), // Gold
+                        modifier = Modifier.size(12.dp)
+                    )
                     Text(
                         text = item.rating,
                         color = Color.White,
@@ -376,32 +408,32 @@ fun GenreExplorerSection() {
 
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-//                GenreCard(
-//                    title = "Action",
-//                    icon = Icons.Default.Swords, // Requires material-icons-extended, using generic fallback if needed
-//                    gradientColors = listOf(ColorPrimary, Color(0xFF6B21A8)), // Purple
-//                    modifier = Modifier.weight(1f)
-//                )
-//                GenreCard(
-//                    title = "Sci-Fi",
-//                    icon = Icons.Default.RocketLaunch,
-//                    gradientColors = listOf(Color(0xFF2563EB), Color(0xFF1E3A8A)), // Blue
-//                    modifier = Modifier.weight(1f)
-//                )
+                GenreCard(
+                    title = "Action",
+                    icon = Icons.Default.AccessAlarms, // Requires material-icons-extended, using generic fallback if needed
+                    gradientColors = listOf(ColorPrimary, Color(0xFF6B21A8)), // Purple
+                    modifier = Modifier.weight(1f)
+                )
+                GenreCard(
+                    title = "Sci-Fi",
+                    icon = Icons.Default.RocketLaunch,
+                    gradientColors = listOf(Color(0xFF2563EB), Color(0xFF1E3A8A)), // Blue
+                    modifier = Modifier.weight(1f)
+                )
             }
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-//                GenreCard(
-//                    title = "Romance",
-//                    icon = Icons.Default.Favorite,
-//                    gradientColors = listOf(Color(0xFFEC4899), Color(0xFF9D174D)), // Pink
-//                    modifier = Modifier.weight(1f)
-//                )
-//                GenreCard(
-//                    title = "Magic",
-//                    icon = Icons.Default.AutoFixHigh,
-//                    gradientColors = listOf(Color(0xFFF59E0B), Color(0xFF92400E)), // Amber
-//                    modifier = Modifier.weight(1f)
-//                )
+                GenreCard(
+                    title = "Romance",
+                    icon = Icons.Default.Favorite,
+                    gradientColors = listOf(Color(0xFFEC4899), Color(0xFF9D174D)), // Pink
+                    modifier = Modifier.weight(1f)
+                )
+                GenreCard(
+                    title = "Magic",
+                    icon = Icons.Default.AutoFixHigh,
+                    gradientColors = listOf(Color(0xFFF59E0B), Color(0xFF92400E)), // Amber
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }
@@ -508,7 +540,14 @@ fun AnimeBottomNavigation() {
         NavigationBarItem(
             selected = true,
             onClick = {},
-            icon = {  },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccessAlarms,
+                    contentDescription = null,
+                    tint = Color(0xFFFFD700), // Gold
+                    modifier = Modifier.size(16.dp)
+                )
+            },
             label = { Text("HOME", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
             colors = NavigationBarItemDefaults.colors(
                 selectedIconColor = ColorPrimary,
@@ -521,7 +560,14 @@ fun AnimeBottomNavigation() {
         NavigationBarItem(
             selected = false,
             onClick = {},
-            icon = {  },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccessAlarms,
+                    contentDescription = null,
+                    tint = Color(0xFFFFD700), // Gold
+                    modifier = Modifier.size(16.dp)
+                )
+            },
             label = { Text("BROWSE", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
             colors = NavigationBarItemDefaults.colors(
                 unselectedIconColor = ColorTextSecondary,
@@ -532,7 +578,14 @@ fun AnimeBottomNavigation() {
         NavigationBarItem(
             selected = false,
             onClick = {},
-            icon = {  },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccessAlarms,
+                    contentDescription = null,
+                    tint = Color(0xFFFFD700), // Gold
+                    modifier = Modifier.size(16.dp)
+                )
+            },
             label = { Text("MY LIST", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
             colors = NavigationBarItemDefaults.colors(
                 unselectedIconColor = ColorTextSecondary,
@@ -543,7 +596,14 @@ fun AnimeBottomNavigation() {
         NavigationBarItem(
             selected = false,
             onClick = {},
-            icon = {  },
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccessAlarms,
+                    contentDescription = null,
+                    tint = Color(0xFFFFD700), // Gold
+                    modifier = Modifier.size(16.dp)
+                )
+            },
             label = { Text("PROFILE", fontSize = 10.sp, fontWeight = FontWeight.Bold) },
             colors = NavigationBarItemDefaults.colors(
                 unselectedIconColor = ColorTextSecondary,
@@ -587,12 +647,37 @@ val trendingData = listOf(
 )
 
 val seasonalData = listOf(
-    AnimeItem("Oshi no Ko", "Doga Kobo", "4.9", "https://lh3.googleusercontent.com/aida-public/AB6AXuCYBk7cJbbMa_ATfyXpmzpF449IEu_ta_gM1WIzsGgmfaz9jVj-N5SOeKEvM_M-WQQXwCxWGbJqYdhDaXPb75TJlRebT87ZtG-s_ShE71MxSPJQbRlXxw1izFg9q85pftUfe2zo57trTm4nr33lS1Rkg_QAVAHu39GE9OjfdZCEE5Eb7cXA8Zh31DbQVr7xuk5dSphbCwexa9M4uWVXIgPBT1psVhh7Z8fW1PrhqiqsKZXfbisi33x001Av1ttB5IrserIOJ3yRJF0"),
-    AnimeItem("Hell's Paradise", "MAPPA", "4.7", "https://lh3.googleusercontent.com/aida-public/AB6AXuB4fQOfAAZl4rPt6oL5Ut3xM9aFTgomiOHeeRN_3sbPGtzE_zGpD9-F2fngkiG0fqlb2c0av7Xk6pQep1fyXqNF5C_wBTo2Qkj3Jy0nSBKJhe9KGmy4WnWMCtb3Nn6PuzWViN-Pg3hc08WEubOizqGP4S5SNsA9cAoSLk_eNqS4IWnK-Z9pDus837Aa5qyJfpQbbXCPTlcOdL526vHVADskcPFEqAU6HfizHrfPJEEV-z1H5ijUeUv-BbQ8H8jNl--48qU-PQa8OGI"),
-    AnimeItem("Mashle", "A-1 Pictures", "4.5", "https://lh3.googleusercontent.com/aida-public/AB6AXuDVH2WQU7ACBrnhk7t8IMtk4gMKvuef_3Qg6ZL1trR-hSORq9w6jDxuwKH7PUFcwdqlcDjplAxYRlHKS6BAABJN8e7bjvn5kOSITTuFOlN8z9eU8jBs7D4QgT4a4WYAM1JBbLudlXYItzziCEFtf3AcG9GP3FE6OAsO9dgyWCxu9qfhCBuUg9O6TXBQMAROUwmdDZE3S9n3ONX-e4AyH76VlDmKynC5J7C4gJCrsXebTzKwkbrIKgChWvIl9ldB-BC3JrkxBoiWxQg")
+    AnimeItem(
+        "Oshi no Ko",
+        "Doga Kobo",
+        "4.9",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCYBk7cJbbMa_ATfyXpmzpF449IEu_ta_gM1WIzsGgmfaz9jVj-N5SOeKEvM_M-WQQXwCxWGbJqYdhDaXPb75TJlRebT87ZtG-s_ShE71MxSPJQbRlXxw1izFg9q85pftUfe2zo57trTm4nr33lS1Rkg_QAVAHu39GE9OjfdZCEE5Eb7cXA8Zh31DbQVr7xuk5dSphbCwexa9M4uWVXIgPBT1psVhh7Z8fW1PrhqiqsKZXfbisi33x001Av1ttB5IrserIOJ3yRJF0"
+    ),
+    AnimeItem(
+        "Hell's Paradise",
+        "MAPPA",
+        "4.7",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuB4fQOfAAZl4rPt6oL5Ut3xM9aFTgomiOHeeRN_3sbPGtzE_zGpD9-F2fngkiG0fqlb2c0av7Xk6pQep1fyXqNF5C_wBTo2Qkj3Jy0nSBKJhe9KGmy4WnWMCtb3Nn6PuzWViN-Pg3hc08WEubOizqGP4S5SNsA9cAoSLk_eNqS4IWnK-Z9pDus837Aa5qyJfpQbbXCPTlcOdL526vHVADskcPFEqAU6HfizHrfPJEEV-z1H5ijUeUv-BbQ8H8jNl--48qU-PQa8OGI"
+    ),
+    AnimeItem(
+        "Mashle",
+        "A-1 Pictures",
+        "4.5",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuDVH2WQU7ACBrnhk7t8IMtk4gMKvuef_3Qg6ZL1trR-hSORq9w6jDxuwKH7PUFcwdqlcDjplAxYRlHKS6BAABJN8e7bjvn5kOSITTuFOlN8z9eU8jBs7D4QgT4a4WYAM1JBbLudlXYItzziCEFtf3AcG9GP3FE6OAsO9dgyWCxu9qfhCBuUg9O6TXBQMAROUwmdDZE3S9n3ONX-e4AyH76VlDmKynC5J7C4gJCrsXebTzKwkbrIKgChWvIl9ldB-BC3JrkxBoiWxQg"
+    )
 )
 
 val classicsData = listOf(
-    AnimeItem("Fullmetal Alchemist", "", "9.1", "https://lh3.googleusercontent.com/aida-public/AB6AXuBZqqJeKI_DQG6uW4rThLp2tui9-7UTOZ5mpOIXLvS4lOxiLvz4EYDRoi-ZO2F4eW1Qov76W-WnzYkTjKdGEjNY8OvwvCsrDOIn0b-e6dLrcPQe3j86u5p_YKBzdYXCeakdA2vdMvelJsnLFNzbNCg7iuu1eTkXXCM2xhM0MP1CRn62JNjgePfzTtq5Zr0pvZarsTLW4No_pN-4ZqtpvHzb5F0ZD8ZgdG_DIAGX6yjve1NZPDS8zhEURazYww-vTNn1W0vrKvZpD5Y"),
-    AnimeItem("Steins;Gate", "", "9.0", "https://lh3.googleusercontent.com/aida-public/AB6AXuBDvKgd_Ux5Yf-t6WWDPA7nY1efzM-wE4V7tvu3Ak1hqctuNrI2UZV59YovOZ8N4zppCW8UUos_SMJDKwvthcxi-htRDtEGiRK1L9P5bECOC7RDGci0bKfutqC8mH9QBIu6SKTo9T1B9q2NJ-O7x36dQjN9D-pjjB_4u77C11N5YVffeqPcL8Hwg7qViWVoahPT17i9ZT0pYxb940fYCzV_36pnRryttiUzsjZuiv6eRuSPu2pM4o7aXkQBAtS4a81Pp_eWwkoDjk0")
+    AnimeItem(
+        "Fullmetal Alchemist",
+        "",
+        "9.1",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuBZqqJeKI_DQG6uW4rThLp2tui9-7UTOZ5mpOIXLvS4lOxiLvz4EYDRoi-ZO2F4eW1Qov76W-WnzYkTjKdGEjNY8OvwvCsrDOIn0b-e6dLrcPQe3j86u5p_YKBzdYXCeakdA2vdMvelJsnLFNzbNCg7iuu1eTkXXCM2xhM0MP1CRn62JNjgePfzTtq5Zr0pvZarsTLW4No_pN-4ZqtpvHzb5F0ZD8ZgdG_DIAGX6yjve1NZPDS8zhEURazYww-vTNn1W0vrKvZpD5Y"
+    ),
+    AnimeItem(
+        "Steins;Gate",
+        "",
+        "9.0",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuBDvKgd_Ux5Yf-t6WWDPA7nY1efzM-wE4V7tvu3Ak1hqctuNrI2UZV59YovOZ8N4zppCW8UUos_SMJDKwvthcxi-htRDtEGiRK1L9P5bECOC7RDGci0bKfutqC8mH9QBIu6SKTo9T1B9q2NJ-O7x36dQjN9D-pjjB_4u77C11N5YVffeqPcL8Hwg7qViWVoahPT17i9ZT0pYxb940fYCzV_36pnRryttiUzsjZuiv6eRuSPu2pM4o7aXkQBAtS4a81Pp_eWwkoDjk0"
+    )
 )
